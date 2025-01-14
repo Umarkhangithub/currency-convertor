@@ -3,15 +3,12 @@ import { useState, useEffect } from "react";
 const CurrencyConverter = () => {
   const [currencies, setCurrencies] = useState([]);
   const [fromCurrency, setFromCurrency] = useState("usd");
-  // console.log('fromCurrency is : ',fromCurrency)
   const [toCurrency, setToCurrency] = useState("inr");
-  // console.log('toCurrency is : ',toCurrency)
   const [amount, setAmount] = useState(1);
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [exchangeRate, setExchangeRate] = useState(null);
 
   const API_URL = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${fromCurrency.toLocaleLowerCase()}.json`;
-  // console.log('API_URL is : ',API_URL)
 
   useEffect(() => {
     // Fetch currency data when component mounts or when fromCurrency changes
@@ -19,7 +16,6 @@ const CurrencyConverter = () => {
       .then((response) => response.json())
       .then((data) => {
         // Remove the template literal syntax error
-        console.log(Object.keys(data[fromCurrency.toLowerCase()]));
         setCurrencies(Object.keys(data[fromCurrency.toLowerCase()]));
         setExchangeRate(
           data[fromCurrency.toLowerCase()][toCurrency.toLowerCase()]
@@ -34,7 +30,6 @@ const CurrencyConverter = () => {
     }
   }, [amount, exchangeRate]);
 
-  console.log("currencies is : ", currencies);
 
   const handleAmountChange = (e) => setAmount(e.target.value);
   const handleFromCurrencyChange = (e) => setFromCurrency(e.target.value);
